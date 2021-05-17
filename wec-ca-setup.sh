@@ -3,7 +3,7 @@ rm -rf pki/*
 # Generate the key of the WEC CA
 
 mkdir -p pki/ca/private
-echo 'S3curity-1nfra' > pki/ca/private/passphrase.txt
+echo '<a password>' > pki/ca/private/passphrase.txt
 echo -e "- Generating private key for WEC CA:\t\t\t\t\twec_ca.key"
 
 openssl genrsa \
@@ -26,7 +26,7 @@ openssl req \
         -nodes \
         -key pki/ca/private/wec_ca.key \
         -days 7300 -out pki/ca/certs/wec_ca.crt \
-        -subj '/C=NL/L=DenHaag/O=KPN/OU=LogManagement/CN=LogManagementClientCA' &>/dev/null
+        -subj '/C=Country/L=City/O=Organization/OU=OrganizationUnit/CN=CommonName' &>/dev/null
 
 # Compute the fingerprint for wec_ca.crt (It will be used by the Windows host)
 
@@ -50,7 +50,7 @@ openssl req \
         -nodes \
         -out pki/client/wec-client-generic.csr \
         -keyout pki/client/wec-client-generic.key \
-        -subj '/C=NL/L=DenHaag/O=KPN/OU=LogManagement/CN=*' &>/dev/null
+        -subj '/C=Country/L=City/O=Organization/OU=OrganizationUnit/CN=*' &>/dev/null
 
 # Signing the CSR
 
